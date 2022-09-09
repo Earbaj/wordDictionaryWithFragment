@@ -8,10 +8,9 @@ plugins {
 android {
     compileSdk 32
 
-    ext {
-        nav_version = "2.4.2"
+    buildFeatures{
+        dataBinding true
     }
-
     defaultConfig {
         applicationId "com.example.worddictionarywithfragment"
         minSdk 21
