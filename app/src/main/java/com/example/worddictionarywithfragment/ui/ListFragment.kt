@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.ListAdapter
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -45,12 +46,37 @@ class ListFragment : Fragment() {
         recyclerView.adapter = LetterListAdapter()
     }
 
+    private fun menuIcon(menuItem: MenuItem?){
+        if(menuItem == null){
+            return
+        }
+
+        menuItem.icon = if (isLinearLayout){
+            ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_grid_layout)
+        }else ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_linear_layout)
+
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_item, menu)
+        val actionButton = menu.findItem(R.id.menu_button)
+        return menuIcon(actionButton)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            R.id.menu_button -> {
+                // Sets isLinearLayoutManager (a Boolean) to the opposite value
+                isLinearLayout = !isLinearLayout
+                // Sets layout and icon
+                choseLayout()
+                menuIcon(item)
+
+                return true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }
