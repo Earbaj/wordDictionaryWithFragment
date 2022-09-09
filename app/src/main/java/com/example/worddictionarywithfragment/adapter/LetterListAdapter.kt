@@ -1,24 +1,31 @@
 package com.example.worddictionarywithfragment.adapter
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
+import com.example.worddictionarywithfragment.R
 
 class LetterListAdapter: RecyclerView.Adapter<LetterListAdapter.LetterViewHolder>(){
 
-    class LetterViewHolder(private val view: View): RecyclerView.ViewHolder(view){
+    private val letters = ('A').rangeTo('Z').toList()
 
+    class LetterViewHolder(private val view: View): RecyclerView.ViewHolder(view){
+        val button = view.findViewById<Button>(R.id.btn_view)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LetterViewHolder {
-        TODO("Not yet implemented")
+        val layout = LayoutInflater.from(parent.context).inflate(R.layout.list_item,parent,false)
+        return LetterViewHolder(layout)
     }
 
     override fun onBindViewHolder(holder: LetterViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        var res = letters[position]
+        holder.button.text = res.toString()
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return letters.size
     }
 }
