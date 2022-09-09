@@ -28,12 +28,14 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         // Inflate the layout for this fragment
         //val views = inflater.inflate(R.layout.fragment_list, container, false)
         _binding = FragmentListBinding.inflate(inflater, container, false)
         recyclerView = binding.recyclerView
-        recyclerView.adapter = LetterListAdapter()
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+//        recyclerView.adapter = LetterListAdapter()
+//        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        choseLayout()
         return binding.root
     }
 
@@ -51,16 +53,17 @@ class ListFragment : Fragment() {
             return
         }
 
-        menuItem.icon = if (isLinearLayout){
-            ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_grid_layout)
-        }else ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_linear_layout)
+        menuItem.icon =
+            if (isLinearLayout)
+                ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_grid_layout)
+            else ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_linear_layout)
 
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_item, menu)
         val actionButton = menu.findItem(R.id.menu_button)
-        return menuIcon(actionButton)
+        menuIcon(actionButton)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
