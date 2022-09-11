@@ -24,19 +24,26 @@ class ListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var isLinearLayout: Boolean = true
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(true)
         // Inflate the layout for this fragment
         //val views = inflater.inflate(R.layout.fragment_list, container, false)
         _binding = FragmentListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.recyclerView
 //        recyclerView.adapter = LetterListAdapter()
 //        recyclerView.layoutManager = LinearLayoutManager(requireContext())
         choseLayout()
-        return binding.root
     }
 
     private fun choseLayout(){

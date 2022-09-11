@@ -28,6 +28,9 @@ class WordFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.let {
+            letterId = it.getString(LETTER).toString()
+        }
     }
 
     override fun onCreateView(
@@ -36,10 +39,10 @@ class WordFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentWordBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        arguments?.let {
-            letterId = it.getString(LETTER).toString()
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = WordListadapter(letterId, requireContext())
@@ -48,12 +51,6 @@ class WordFragment : Fragment() {
         recyclerView.addItemDecoration(
             DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         )
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {
