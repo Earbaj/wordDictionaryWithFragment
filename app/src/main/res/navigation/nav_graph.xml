@@ -20,7 +20,7 @@
         android:label="fragment_word"
         tools:layout="@layout/fragment_word" >
         <argument
-            android:name="words"
+            android:name="letter"
             app:argType="string" />
     </fragment>
 </navigation>
